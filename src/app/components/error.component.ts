@@ -4,13 +4,12 @@ import { Component } from '@angular/core';
     selector: 'error',
     templateUrl: '../view/error.html'
   })
-
 export class ErrorComponent {
 
     public titulo: string;
 
     constructor(){
-        this.titulo = 'Error|| Página no encontrada';
+        this.titulo = 'Error!! Página no encontrada';
     }
     
     ngOnInit() {
