@@ -3,6 +3,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ProductoService } from '../services/producto.service';
 import { Producto } from '../model/producto';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { GLOBAL } from '../services/global';
 
 @Component({
     selector: 'producto-add',
@@ -24,15 +25,37 @@ export class ProductoAddComponent {
         this.producto = new Producto(0, '', '', 0, '');
     }
 
-    ngOnInit(){
+    ngOnInit() {
         console.log('Iniciando productoAddComponent');
     }
 
-    onSubmit(){
+    onSubmit() {
+        console.log('objecto producto '+this.producto.imagen);
+        if (this.filesToUpload != null && this.filesToUpload.length >= 1) {
+            this._productoService.makeFileRequest(GLOBAL.url + '/upload', [], this.filesToUpload)
+                .then((result) => {
+                    console.log('resultado '+ result);
+                    this.resultUpload = result;
+                    console.log('imagen producto ' + this.resultUpload);
+                    const arrayResult =  this.resultUpload.split("\\\"");
+                    this.producto.imagen = arrayResult[1];
+                    console.log(this.producto);
+
+                    this.saveProducto();
+                }, error => {
+                    console.log(error);
+                });
+        } else {
+            this.saveProducto();
+        }
+
+    }
+
+    saveProducto() {
         console.log(this.producto);
         this._productoService.addProducto(this.producto).subscribe(
             response => {
-                if(response.code == 200) {
+                if (response.code == 200) {
                     this._router.navigate(['/productos']);
                 } else {
                     console.log(response);
@@ -41,7 +64,6 @@ export class ProductoAddComponent {
                 console.log(<any>error);
             }
         );
-
     }
 
     fileChangeEvent(fileInput: any) {

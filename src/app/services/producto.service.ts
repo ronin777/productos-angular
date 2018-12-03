@@ -41,7 +41,7 @@ export class ProductoService {
             xhr.onreadystatechange = function () {
                 if (xhr.readyState == 4) {
                     if (xhr.status == 200) {
-                        resolve(JSON.parse(xhr.response));
+                        resolve(JSON.stringify(xhr.response));
                     } else {
                         reject(xhr.response);
                     }

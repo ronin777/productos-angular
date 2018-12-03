@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home.component';
 import { ProductosListComponent } from './components/productos-list.component';
 import { ProductoAddComponent } from './components/producto-add.component';
+import { ProductoDetailComponent } from './components/producto-detail.component';
 import { ErrorComponent } from './components/error.component';
 
 @NgModule({
@@ -19,6 +20,7 @@ import { ErrorComponent } from './components/error.component';
     HomeComponent,
     ProductosListComponent,
     ProductoAddComponent,
+    ProductoDetailComponent,
     ErrorComponent
   ],
   imports: [
