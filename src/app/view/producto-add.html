@@ -13,24 +13,33 @@
 
             <div class="form-group">
                 <label for="descripcion">Descripcion
-                    <span *ngIf="!descripcion.valid && descripcion.touched" class="badge badge-danger">La Descripcion es
+                    <span *ngIf="!descripcion.valid && descripcion.touched" class="badge badge-danger">La Descripcion
+                        es
                         Obligatorio</span>
                 </label>
-                <textarea name="descripcion" #descripcion="ngModel" [(ngModel)]="producto.descripcion" class="form-control" required></textarea>
+                <textarea name="descripcion" #descripcion="ngModel" [(ngModel)]="producto.descripcion" class="form-control"
+                    required></textarea>
             </div>
 
             <div class="form-group">
                 <label for="precio">Precio
-                    <span *ngIf="!precio.valid && precio.touched" class="badge badge-danger">El Valor de Precio NO es correcto</span>
+                    <span *ngIf="!precio.valid && precio.touched" class="badge badge-danger">El Valor de Precio NO es
+                        correcto</span>
                 </label>
-                <input type="text" #precio="ngModel" name="precio" [(ngModel)]="producto.precio" class="form-control" required pattern="[0-9]+">
+                <input type="text" #precio="ngModel" name="precio" [(ngModel)]="producto.precio" class="form-control"
+                    required pattern="[0-9]+">
             </div>
 
             <div class="form-group">
                 <label for="imagen">Imagen</label>
-                <input type="file" #imagen="ngModel" name="imagen" [(ngModel)]="producto.imagen" (change)="fileChangeEvent($event)" class="form-control">
+                <div *ngIf="is_edit">
+                    <img src="http://localhost:8080/projects/Productos_Api_Rest/uploads/{{producto.imagen}}" alt=""
+                        class="producto_imagen_detail">
+                </div>
+                <input type="file" #imagen="ngModel" name="imagen" [(ngModel)]="producto.imagen" (change)="fileChangeEvent($event)"
+                    class="form-control">
             </div>
-            <br>
+            <br><br><br>
             <input type="submit" value="{{titulo}}" [disabled]="!formProducto.form.valid" class="btn btn-success">
         </form>
     </div>

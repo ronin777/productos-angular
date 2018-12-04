@@ -22,5 +22,24 @@ export class ProductoDetailComponent {
 
     ngOnInit() {
         console.log('Componente producto detail cargado...');
+        this.getProducto();
     }
+
+    getProducto(){
+        this._route.params.forEach((params: Params) => {
+            let id = params['id'];
+            this._productoService.getProducto(id).subscribe(
+                response => {
+                    if(response.code == 200){
+                        this.producto = response.data;
+                    } else {
+                        this._router.navigate(['/productos']);
+                    }
+                }, error => {
+                    console.log(<any>error);
+                }
+            );
+        });
+    }
+
 }

@@ -21,7 +21,7 @@ export class ProductoAddComponent {
         private _route: ActivatedRoute,
         private _router: Router
     ) {
-        this.titulo = 'Agragar Producto';
+        this.titulo = 'Agregar Producto';
         this.producto = new Producto(0, '', '', 0, '');
     }
 
@@ -30,17 +30,13 @@ export class ProductoAddComponent {
     }
 
     onSubmit() {
-        console.log('objecto producto '+this.producto.imagen);
         if (this.filesToUpload != null && this.filesToUpload.length >= 1) {
             this._productoService.makeFileRequest(GLOBAL.url + '/upload', [], this.filesToUpload)
                 .then((result) => {
-                    console.log('resultado '+ result);
+                    console.log('resultado ' + result);
                     this.resultUpload = result;
-                    console.log('imagen producto ' + this.resultUpload);
                     const arrayResult =  this.resultUpload.split("\\\"");
                     this.producto.imagen = arrayResult[1];
-                    console.log(this.producto);
-
                     this.saveProducto();
                 }, error => {
                     console.log(error);

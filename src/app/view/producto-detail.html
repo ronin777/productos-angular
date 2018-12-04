@@ -1,6 +1,33 @@
-<div class="col-lg-12 col-lg-offset-1 text-center">
+<div class="col-lg-12 col-lg-offset-1">
     <div class="jumbotron">
-        <h3>Detalle del Producto</h3>
+        <div *ngIf="!producto" class="text-center">
+            <p> Cargando Producto...</p>
+        </div>
+        <div *ngIf="producto">
+
+            <h3 class="text-center">Detalle del Producto</h3>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div *ngIf="producto.imagen" class="imagen_container">
+                            <img src="http://localhost:8080/projects/Productos_Api_Rest/uploads/{{producto.imagen}}"
+                                alt="" class="producto_imagen_detail">
+                        </div>
+                        <div *ngIf="!producto.imagen">
+                            <div class="imagen_relleno"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-8">
+                        <h4>{{producto.nombre}}</h4>
+                        <p>{{producto.descripcion}}</p>
+                        <p><strong>$ {{producto.precio}} MXN</strong></p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
 
     </div>
 </div>
